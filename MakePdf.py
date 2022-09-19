@@ -32,7 +32,7 @@ arabic_text_style = ParagraphStyle(
 def savepdf():
 
     newdata=backend.View()
-    lists=[]
+    lists=[("id","الايميل", "الرمز", "النوع","الملاحظات","تاريخ الاضافه")]
     for x in newdata:
         y = [str(xy) for xy in x]
         lists.append(y)
