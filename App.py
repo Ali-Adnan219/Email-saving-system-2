@@ -6,7 +6,7 @@ from prettytable import PrettyTable
 from datetime import date
 from datetime import datetime
 import backend
-
+import MakePdf
 
 
 
@@ -51,8 +51,8 @@ def main(page):
             value_matrix=backend.View(),
             )
             return writer.dumps()
-
-        page.add(ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain,width=500,height=100) ,
+        page.add(Row([savepdfs,ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain,width=500,height=100)]))
+        page.add( 
         Markdown(
            main1(),
             extension_set="gitHubWeb",
@@ -93,6 +93,7 @@ def main(page):
     hadedel=ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain  ,width=200,height=100,)
     chukdel=ElevatedButton(" تم مسح ايدي  ", on_click=backmain  ,width=200,height=50,)
     chukِAdd=ElevatedButton(" تم اضافة الحساب بنجاح اضغط للذهاب للجدول و التحقق", on_click=btn_click  ,width=400,height=50,)
+    savepdfs=ElevatedButton("pdf طباعة جدول", on_click=MakePdf.savepdf()  ,width=200,height=50,)
 
 #Run
 flet.app(target=main)
