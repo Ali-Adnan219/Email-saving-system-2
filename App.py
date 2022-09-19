@@ -51,13 +51,14 @@ def main(page):
             value_matrix=backend.View(),
             )
             return writer.dumps()
-        page.add(Row([savepdfs,ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain,width=500,height=100)]))
-        page.add( 
+        page.add(Row([savepdfs,ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain,width=200,height=50)],alignment="center"))
+        page.add(
         Markdown(
            main1(),
             extension_set="gitHubWeb",
             expand=True,
             selectable=True
+            
             
         ))
 
@@ -66,7 +67,6 @@ def main(page):
         #page input data
         page.clean()
         page.add(txt_name4,savedata,hudedata)
-    
     def backmain(e):
         #home page
         page.clean()
