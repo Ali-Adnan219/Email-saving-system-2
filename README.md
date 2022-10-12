@@ -10,7 +10,6 @@
 
 ![Home App](https://github.com/Ali-Adnan219/Email-saving-system-2/blob/main/image/img-4.png)
 
-![Home App](https://github.com/Ali-Adnan219/Email-saving-system-2/blob/main/image/img-5.png)
 
 
  

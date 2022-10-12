@@ -7,6 +7,7 @@ from datetime import date
 from datetime import datetime
 import backend
 import MakePdf
+import os
 
 
 
@@ -35,8 +36,13 @@ def main(page):
         chukdel=ElevatedButton(deldata.value+": تم مسح ايدي  ", on_click=backmain  ,width=200,height=50,)
         page.add(chukdel)
         backend.deleteitem(deldata.value)
-
-
+    def del_by_numbers(e):
+        for number in range(int(del_from_number.value),int(del_to_number.value)):
+            backend.deleteitem(number)
+    def del_all_data(e):
+        os.remove("./mydata.db")
+        page.clean()
+        page.add(Row([ElevatedButton("تم مسح كل بيانات و الان اخرج من برنامج و شغله مره اخرى", on_click=backmain,width=400,height=80)],alignment="center"))
     def btn_click(e):
         #table data show
         page.clean()
@@ -51,18 +57,25 @@ def main(page):
             value_matrix=backend.View(),
             )
             return writer.dumps()
-        page.add(Row([savepdfs,ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain,width=200,height=50)],alignment="center"))
+        number_all_table=0
+        for xn in backend.View():
+            number_all_table+=1
+        #print(number_all_table)
+        page.add(Row([ElevatedButton(str(number_all_table)+" : عدد البريد المحفوظ",width=200,height=50),savepdfs,ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain,width=200,height=50),del_all_table,del_one_table],alignment="center"))
+        page.add(Row([del_to_number,del_from_number,del_all_bynumber],alignment="center"))
         page.add(
         Markdown(
            main1(),
             extension_set="gitHubWeb",
             expand=True,
-            selectable=True
+            selectable=True,
+            
             
             
         ))
 
-
+    def save_pdf(e):
+        MakePdf.savepdfs()
     def input_data(e):
         #page input data
         page.clean()
@@ -74,7 +87,7 @@ def main(page):
         bat1=ElevatedButton("جدول البيانات المحفوضه", on_click=btn_click  ,width=200,height=120)
         bat2=ElevatedButton("اضافة بيانات جديده", on_click=input_data  ,width=200,height=120,)
         bat3=ElevatedButton("مسح البيانات", on_click=showdel  ,width=200,height=120,)
-        page.add( Column([ElevatedButton("مرحبا بكم في نظام حفظ الحسابات اختر احدي الخيارات",width=500,height=100,),],width=500,height=100,alignment="center",spacing=42,),Row([bat1,bat2,bat3] ,alignment="center",spacing=40,) )
+        page.add( Row([ElevatedButton("مرحبا بكم في نظام حفظ الحسابات اختر احدي الخيارات",width=500,height=100,),],width=500,height=100,alignment="center",spacing=42,),Row([bat1,bat2,bat3] ,alignment="center",spacing=40,) )
 
 
     backmain("e")
@@ -83,17 +96,21 @@ def main(page):
     txt2=TextField(label="الرمز",width=300,height=100  ,multiline=True,text_align='center',text_size=20 , )
     txt3= TextField(label="النوع",width=300,height=100  ,multiline=True,text_align='center',text_size=20 )
     txt4= TextField(label="الملاحظات",width=300,height=100  ,multiline=True,text_align='center',text_size=20 )
-    txt_name4 = Row([txt1,txt2,txt3,txt4  ])
+    txt_name4 = Column([txt1,txt2,txt3,txt4  ],alignment="center")
 
-    savedata=ElevatedButton("حفظ بيانات", on_click=get_data_fro_input  ,width=170,height=120,)
-    hudedata=ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain  ,width=200,height=120,)
+    savedata=ElevatedButton("حفظ بيانات", on_click=get_data_fro_input  ,width=200,height=50,)
+    hudedata=ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain  ,width=200,height=50,)
     #del data page
-    deldata=TextField(label="ادخل ايدي",width=300,height=100  ,multiline=True,text_align='center',text_size=20  ,border_radius=border_radius.all(5))
-    delsdata=ElevatedButton("مسح", on_click=del_data  ,width=170,height=100,)
-    hadedel=ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain  ,width=200,height=100,)
+    deldata=TextField(label="ادخل ايدي",width=300,height=80  ,multiline=True,text_align='center',text_size=20  ,)
+    delsdata=ElevatedButton("مسح", on_click=del_data  ,width=200,height=50,)
+    hadedel=ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain  ,width=200,height=50,)
     chukdel=ElevatedButton(" تم مسح ايدي  ", on_click=backmain  ,width=200,height=50,)
     chukِAdd=ElevatedButton(" تم اضافة الحساب بنجاح اضغط للذهاب للجدول و التحقق", on_click=btn_click  ,width=400,height=50,)
-    savepdfs=ElevatedButton("pdf طباعة جدول", on_click=MakePdf.savepdf()  ,width=200,height=50,)
-
+    savepdfs=ElevatedButton("pdf طباعة كامل جدول", on_click=save_pdf,width=200,height=50,)
+    del_all_table=ElevatedButton("حذف كل البيانات"  ,on_click=del_all_data,width=200,height=50,)
+    del_one_table=ElevatedButton("حذف  بريد واحد"  ,on_click=showdel,width=200,height=50,)
+    del_from_number=TextField(label="حذف من رقم ",width=200,height=60  ,multiline=True,text_align='center',text_size=16  ,)
+    del_to_number=TextField(label="حذف الى رقم ",width=200,height=60 ,multiline=True,text_align='center',text_size=16  ,)
+    del_all_bynumber=ElevatedButton("حذف بيانات محدده"  ,on_click=del_by_numbers,width=200,height=50,)
 #Run
 flet.app(target=main)
