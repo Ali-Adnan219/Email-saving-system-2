@@ -16,6 +16,7 @@ import os
 def main(page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
+    page.theme_mode = "dark"
     page.title = "برنامج حفظ الحسابات"
     def get_data_fro_input(e):
         #save data in sqlit3 file
