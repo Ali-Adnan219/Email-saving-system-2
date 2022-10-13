@@ -84,11 +84,10 @@ def main(page):
     def backmain(e):
         #home page
         page.clean()
-        page.theme = Theme(font_family="Kanit")
         bat1=ElevatedButton("جدول البيانات المحفوضه", on_click=btn_click  ,width=200,height=120)
         bat2=ElevatedButton("اضافة بيانات جديده", on_click=input_data  ,width=200,height=120,)
         bat3=ElevatedButton("مسح البيانات", on_click=showdel  ,width=200,height=120,)
-        page.add( Row([ElevatedButton("مرحبا بكم في نظام حفظ الحسابات اختر احدي الخيارات",width=500,height=100,),],width=500,height=100,alignment="center",spacing=42,),Row([bat1,bat2,bat3] ,alignment="center",spacing=40,) )
+        page.add( Row([ElevatedButton("مرحبا بكم في نظام حفظ الحسابات اختر احدي الخيارات",width=500,height=100,),],width=500,height=100,alignment="center",spacing=42,),Row([bat1,bat2] ,alignment="center",spacing=40,) )
 
 
     backmain("e")
@@ -102,7 +101,7 @@ def main(page):
     savedata=ElevatedButton("حفظ بيانات", on_click=get_data_fro_input  ,width=200,height=50,)
     hudedata=ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain  ,width=200,height=50,)
     #del data page
-    deldata=TextField(label="ادخل ايدي",width=300,height=80  ,multiline=True,text_align='center',text_size=20  ,)
+    deldata=TextField(label="ID ادخل رقم ",width=300,height=80  ,multiline=True,text_align='center',text_size=20  ,)
     delsdata=ElevatedButton("مسح", on_click=del_data  ,width=200,height=50,)
     hadedel=ElevatedButton("الرجوع الى قائمه الرئيسية", on_click=backmain  ,width=200,height=50,)
     chukdel=ElevatedButton(" تم مسح ايدي  ", on_click=backmain  ,width=200,height=50,)
