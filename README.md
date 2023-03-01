@@ -1,4 +1,4 @@
-### رابط  نزيل برنامج
+### رابط تزيل البرنامج
 ![تنزيل](https://github.com/Ali-Adnan219/Email-saving-system-2/releases/download/app-2%2F25%2F2023/App-2-25-2023.zip)
 ### اضافات في مستقبل:
 - [x] مسح قاعدة بيانات من برنامج 
